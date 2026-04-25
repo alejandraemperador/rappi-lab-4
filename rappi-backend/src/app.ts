@@ -10,9 +10,13 @@ import { router as ordersRouter } from './features/orders/orders.router';
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:5173', 
+  origin: [
+    'http://localhost:5173', 
+    'https://rappi-lab-4-fronted.vercel.app'
+  ], 
   credentials: true,
-  methods: ['GET', 'POST', 'PATCH', 'DELETE']
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.get('/', (req, res) => {
