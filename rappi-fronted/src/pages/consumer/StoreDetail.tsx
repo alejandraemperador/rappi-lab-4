@@ -84,7 +84,7 @@ export default function StoreDetail() {
                 quantity: item.quantity,
                 priceattime: item.price
             })),
-            destination: selectedPos 
+            destination: selectedPos
         };
 
         try {
@@ -95,6 +95,8 @@ export default function StoreDetail() {
             alert("No se pudo crear el pedido");
         }
     };
+
+    if (loading) return <div>Cargando...</div>;
 
     return (
         <div className="min-h-screen bg-[#F8F9FA]">
