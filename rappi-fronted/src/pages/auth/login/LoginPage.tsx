@@ -4,22 +4,17 @@ import { UserRole } from '../../../types/auth.types';
 import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
-    const navigate = useNavigate(); //Función para poder mover al usuario de una URL a otra
+    const navigate = useNavigate();
     const [credentials, setCredentials] = useState({ email: '', password: '' });
-   //Aquí guardas lo que escribe el usuario
+
     const [loading, setLoading] = useState(false);
 
-    //Esta función se ejecuta cuando envías el formulario
+
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         try {
             const data = await login(credentials);
-            //Llama a tu servicio de Axios pasándole el email y el password
-            //  Aquí es donde el Front se conecta con el Back.
-
-            //memoria del navegador, para mantener logueado y que al recargarse
-            //la pagina no se reinicie nada
             localStorage.clear();
 
             localStorage.setItem('token', data.session.access_token);
@@ -29,7 +24,6 @@ export default function LoginPage() {
 
             const role = data.user.user_metadata.role;
 
-            //REDIRECCIÓN SEGÚN ROL
             if (role === UserRole.CONSUMER) {
                 navigate('/consumer');
             } else if (role === UserRole.STORE) {
@@ -51,7 +45,7 @@ export default function LoginPage() {
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-50 p-4 font-sans">
             <form
-                onSubmit={handleLogin} //Cuando envías el formulario → ejecuta handleLogin
+                onSubmit={handleLogin}
                 className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-sm flex flex-col gap-5 border-t-8 border-orange-500"
             >
                 <div className="flex flex-col gap-1">
@@ -71,8 +65,6 @@ export default function LoginPage() {
                         placeholder="ejemplo@correo.com"
                         required
                         onChange={e => setCredentials({ ...credentials, email: e.target.value })}
-                        //Cada vez que el usuario presione una tecla,
-                        // toma lo que ya había en credentials (...credentials) y actualiza solo el email".
                     />
 
                     <label className="text-xs font-bold text-gray-400 uppercase ml-1">Contraseña</label>
@@ -88,8 +80,6 @@ export default function LoginPage() {
                 <button
                     type="submit"
                     disabled={loading}
-                    //Si el código está esperando al servidor, el botón se bloquea.
-                    //Si loading = true → se desactiva
                     className={`bg-orange-500 text-white p-4 rounded-xl font-bold text-lg hover:bg-orange-600 transition-all shadow-lg shadow-orange-200 mt-2 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                     {loading ? 'Cargando...' : 'Iniciar Sesión'}

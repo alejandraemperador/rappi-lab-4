@@ -84,7 +84,7 @@ export default function StoreDetail() {
                 quantity: item.quantity,
                 priceattime: item.price
             })),
-            destination: selectedPos // Usando Lating {latitude, longitude}
+            destination: selectedPos 
         };
 
         try {
@@ -110,7 +110,7 @@ export default function StoreDetail() {
 
                 <div className="flex flex-col lg:flex-row gap-10">
                     <div className="flex-1 space-y-8">
-                        {/* SECCIÓN DEL MAPA PARA EL CONSUMIDOR */}
+
                         <div className="bg-white p-6 rounded-[35px] shadow-sm border border-gray-100">
                             <h3 className="text-sm font-black text-gray-800 mb-4 uppercase italic">¿Dónde entregamos?</h3>
                             <OrderMapPicker

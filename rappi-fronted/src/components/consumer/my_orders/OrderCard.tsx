@@ -10,7 +10,6 @@ interface OrderCardProps {
 }
 
 export const OrderCard = ({ item }: OrderCardProps) => {
-    // Lógica de aceptación basada en si hay un repartidor asignado a la orden
     const isAccepted = !!item.deliveryid;
 
     return (
@@ -25,7 +24,6 @@ export const OrderCard = ({ item }: OrderCardProps) => {
                     />
                 </div>
 
-                {/* Info del Producto */}
                 <div>
                     <h4 className="font-black text-gray-800 text-sm uppercase tracking-tight leading-tight">
                         {item.name}
@@ -39,7 +37,6 @@ export const OrderCard = ({ item }: OrderCardProps) => {
                 </div>
             </div>
 
-            {/* Estado de Aceptación (Lado Derecho) */}
             <div className="text-right shrink-0">
                 <p className="text-[8px] text-gray-400 font-black uppercase mb-1 tracking-tighter leading-none">
                     REPARTIDOR

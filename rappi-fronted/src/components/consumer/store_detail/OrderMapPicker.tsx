@@ -20,7 +20,7 @@ interface MapPickerProps {
     selectedPosition: Lating | null;
 }
 
-// Componente para manejar el click y mover la cámara
+
 function MapEvents({ onSelect, selectedPosition }: { onSelect: (pos: Lating) => void, selectedPosition: Lating | null }) {
     const map = useMap();
 
@@ -30,7 +30,6 @@ function MapEvents({ onSelect, selectedPosition }: { onSelect: (pos: Lating) => 
         },
     });
 
-    // Efecto para centrar el mapa si ya hay una posición seleccionada
     useEffect(() => {
         if (selectedPosition?.latitude && selectedPosition?.longitude) {
             map.flyTo([selectedPosition.latitude, selectedPosition.longitude], map.getZoom());
@@ -44,7 +43,7 @@ export const OrderMapPicker = ({ onPositionSelected, selectedPosition }: MapPick
     return (
         <div className="h-64 w-full rounded-2xl overflow-hidden border-2 border-dashed border-gray-200 relative z-0">
             <MapContainer
-                center={[3.4516, -76.5320]} // Centro inicial en Cali
+                center={[3.4516, -76.5320]} 
                 zoom={13}
                 style={{ height: '100%', width: '100%' }}
             >

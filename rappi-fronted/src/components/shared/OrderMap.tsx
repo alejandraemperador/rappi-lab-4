@@ -27,20 +27,18 @@ function RecenterMap({ position }: { position: { lat: number, lng: number } | nu
     return null;
 }
 
-// ✅ Props tipadas correctamente
 interface OrderMapProps {
-    deliveryPos: Lating | null | any; // Usamos Lating o null
-    destination: Lating | null | any; // Usamos Lating o null
+    deliveryPos: Lating | null | any;
+    destination: Lating | null | any;
     isInteractive?: boolean;
 }
 
 export default function OrderMap({ deliveryPos, destination, isInteractive }: OrderMapProps) {
 
-    // ✅ Función con parámetro tipado
     const normalize = (point: Lating | any) => {
         if (!point) return null;
 
-        // Mapeamos los nombres de tus campos de base de datos a lo que Leaflet entiende
+
         const lat = point.latitude ?? point.lat ?? point.destination_lat ?? point.delivery_lat;
         const lng = point.longitude ?? point.lng ?? point.destination_lng ?? point.delivery_lng;
 
@@ -78,7 +76,6 @@ export default function OrderMap({ deliveryPos, destination, isInteractive }: Or
                     </Marker>
                 )}
 
-                {/* Pasamos el objeto normalizado para recentrar */}
                 <RecenterMap position={isInteractive ? dPos : (dPos || dest)} />
             </MapContainer>
         </div>

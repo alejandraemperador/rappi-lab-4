@@ -78,7 +78,6 @@ export default function Orders() {
             <main className="max-w-4xl mx-auto px-6 py-12">
                 <h2 className="text-2xl font-black text-gray-800 italic uppercase mb-10">Mis Pedidos</h2>
 
-                {/* ✅ CAMBIO: Mapa condicional (Se oculta si ya se entregó) */}
                 {isTracking && trackingOrder && currentStatus !== OrderStatus.DELIVERED && (
                     <div className="mb-12 bg-white p-4 rounded-[40px] shadow-xl border-4 border-orange-500 animate-in fade-in zoom-in duration-500 relative">
                         <button
@@ -101,7 +100,6 @@ export default function Orders() {
                     </div>
                 )}
 
-                {/* ✅ CAMBIO: Banner de éxito cuando el pedido es entregado */}
                 {currentStatus === OrderStatus.DELIVERED && isTracking && (
                     <div className="mb-12 bg-green-100 border-2 border-green-200 p-6 rounded-[30px] text-green-700 flex flex-col items-center animate-bounce">
                         <span className="text-3xl mb-2">✨</span>

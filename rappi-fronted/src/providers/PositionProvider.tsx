@@ -15,7 +15,6 @@ const PositionContext = createContext<PositionContextType | null>(null);
 export const PositionProvider = ({ children, activeOrder: initialOrder }: { children: React.ReactNode; activeOrder: Order | null }) => {
     const supabase = useSupabase();
 
-    // ✅ ARREGLO: Estado local para controlar el flujo de la orden
     const [activeOrder, setActiveOrder] = useState<Order | null>(initialOrder);
 
     const [myPosition, setMyPosition] = useState<Lating>(() => {
@@ -26,7 +25,6 @@ export const PositionProvider = ({ children, activeOrder: initialOrder }: { chil
 
     const channelRef = useRef<any>(null);
 
-    // Sincronizar prop con estado local
     useEffect(() => {
         setActiveOrder(initialOrder);
     }, [initialOrder]);
@@ -73,18 +71,16 @@ export const PositionProvider = ({ children, activeOrder: initialOrder }: { chil
             const distance = getDistance(newPos, destination);
 
             if (channelRef.current) {
-                // Notificar movimiento y enviar el status que viene del servidor
                 await channelRef.current.send({
                     type: "broadcast",
                     event: "position-update",
                     payload: {
                         latitude: newPos.latitude,
                         longitude: newPos.longitude,
-                        status: data.status // Aquí usamos 'data' de la respuesta
+                        status: data.status
                     },
                 });
 
-                // Lógica de entrega automática
                 if (distance <= 10) {
                     await axios.patch(
                         `${API_URL}/orders/${activeOrder.id}/status`,

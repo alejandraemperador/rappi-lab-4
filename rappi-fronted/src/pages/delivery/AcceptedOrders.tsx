@@ -5,9 +5,8 @@ import { MapPin, Package, Clock, Truck } from 'lucide-react';
 import { PositionProvider, usePosition } from '../../providers/PositionProvider';
 import OrderMap from '../../components/shared/OrderMap';
 
-// Componente para la lógica interna de la ruta
+
 function ActiveDeliveryView({ order }: { order: any }) {
-    // ✅ Aquí obtenemos la posición que cambia con las flechas
     const { myPosition } = usePosition();
 
     return (

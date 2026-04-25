@@ -1,13 +1,13 @@
 import { createContext, useContext, useState, useCallback, useEffect } from "react";
 import { useSupabase } from "./SupabaseProvider";
-import { type Lating, OrderStatus } from "../types/orders.types"; // ✅ Importamos tus Enums
+import { type Lating, OrderStatus } from "../types/orders.types";
 
 interface OrderTrackingContextType {
     deliveryPos: Lating | null;
     currentStatus: OrderStatus | null;
     isTracking: boolean;
     startTracking: (orderid: string) => void;
-    stopTracking: () => void; // ✅ Nueva función para limpiar
+    stopTracking: () => void;
 }
 
 const OrderTrackingContext = createContext<OrderTrackingContextType | null>(null);
@@ -39,7 +39,6 @@ export const OrderTrackingProvider = ({ children }: { children: React.ReactNode 
         channel
             .on("broadcast", { event: "position-update" }, ({ payload }) => {
                 setDeliveryPos({ latitude: payload.latitude, longitude: payload.longitude });
-                // ✅ Si el broadcast trae status, lo actualizamos también para ir más rápido que la DB
                 if (payload.status) setCurrentStatus(payload.status);
             })
             .on("broadcast", { event: "status-update" }, ({ payload }) => {
@@ -62,12 +61,10 @@ export const OrderTrackingProvider = ({ children }: { children: React.ReactNode 
         };
     }, [trackingOrderId, supabase]);
 
-    // ✅ EFECTO CRÍTICO: Si el estado cambia a Entregado, dejamos de trackear tras un breve delay
     useEffect(() => {
         if (currentStatus === OrderStatus.DELIVERED) {
-            // Esperamos unos segundos para que el usuario vea el icono en el destino final
             const timer = setTimeout(() => {
-                stopTracking(); // Esto debería poner isTracking en false y deliveryPos en null
+                stopTracking();
             }, 3000);
             return () => clearTimeout(timer);
         }
