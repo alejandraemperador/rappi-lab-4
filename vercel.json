@@ -1,15 +1,11 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "rappi-backend/app.ts",
-      "use": "@vercel/node"
-    }
+    { "src": "rappi-backend/app.ts", "use": "@vercel/node" },
+    { "src": "rappi-fronted/package.json", "use": "@vercel/static-build" }
   ],
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "rappi-backend/app.ts"
-    }
+    { "source": "/api/(.*)", "destination": "rappi-backend/app.ts" },
+    { "source": "/(.*)", "destination": "rappi-fronted/index.html" }
   ]
 }
