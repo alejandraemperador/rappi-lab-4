@@ -21,7 +21,6 @@ function ActiveDeliveryView({ order }: { order: any }) {
                 </div>
             </div>
 
-            {/* ✅ Usamos el OrderMap unificado */}
             <OrderMap
                 deliveryPos={myPosition}
                 destination={{
