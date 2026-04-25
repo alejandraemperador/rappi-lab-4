@@ -3,7 +3,7 @@ import axios from "axios";
 import { useSupabase } from "./SupabaseProvider";
 import { type Order, type Lating, OrderStatus } from "../types/orders.types";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/api`;
+const API_URL = `${import.meta.env.VITE_API_URL}api`;
 const MOVE_DELTA = 0.0001;
 
 interface PositionContextType {

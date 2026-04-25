@@ -3,7 +3,7 @@ import type { Order, CreateOrderDTO } from "../types/orders.types";
 import type { Store } from "../types/stores.types";
 import type { Product } from "../types/products.types";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/api`;
+const API_URL = `${import.meta.env.VITE_API_URL}api`;
 
 const getAuthHeaders = () => {
     const token = localStorage.getItem('token');
